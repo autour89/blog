@@ -1,0 +1,59 @@
+import 'package:blog/core/bloc/history_cubit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:intl/intl.dart';
+
+import '../../core/data/repository.dart';
+
+class HistoryPage extends StatelessWidget {
+  const HistoryPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => HistoryCubit(repository: GetIt.I.get<Repository>()),
+      child: Scaffold(
+        appBar: AppBar(),
+        body: Center(
+          child: BlocBuilder<HistoryCubit, int>(
+            builder: (context, state) {
+              return ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: context.read<HistoryCubit>().facts.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          color: Theme.of(context).cardColor,
+                          boxShadow: const [
+                            BoxShadow(
+                                color: Colors.grey,
+                                spreadRadius: 1,
+                                blurRadius: 7,
+                                offset: Offset(0, 3))
+                          ]),
+                      child: ListTile(
+                        title: Text(
+                            context.read<HistoryCubit>().facts[index].text),
+                        subtitle: Text(DateFormat.yMMMd(
+                                Localizations.maybeLocaleOf(context)
+                                    ?.toLanguageTag())
+                            .format(context
+                                .read<HistoryCubit>()
+                                .facts[index]
+                                .createdAt)),
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
