@@ -25,14 +25,9 @@ class FactBloc extends Bloc<FactEvent, FactState> {
     try {
       var fact = await httpClient.getFact();
 
-      repository.add(fact);
+      await repository.add(fact);
 
       PaintingBinding.instance.imageCache.clear();
-      // String locale = Localizations.localeOf(context).languageCode;
-      // DateTime now = new DateTime.now();
-      // String dayOfWeek = DateFormat.EEEE(locale).format(now);
-      // String dayMonth = DateFormat.MMMMd(Localizations.localeOf(context).languageCode).format(now);
-      // String year = DateFormat.y(locale).format(now);
 
       emit(SuccessState());
     } catch (e) {

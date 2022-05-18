@@ -20,7 +20,7 @@ class HiveRepository implements Repository {
   @override
   Future add<T>(T entity) async {
     if (entity is dto.Fact) {
-      _facts.add(Fact.fromDto(entity));
+      await _facts.add(Fact.fromDto(entity));
     }
   }
 
