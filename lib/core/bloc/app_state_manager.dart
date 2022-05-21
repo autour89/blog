@@ -4,6 +4,8 @@ abstract class AppStateEvent {}
 
 class FactHistory extends AppStateEvent {}
 
+class HistoryDismissed extends AppStateEvent {}
+
 class AppState {
   AppState({required this.historySelected});
 
@@ -16,6 +18,9 @@ class AppStateManager extends Bloc<AppStateEvent, AppState> {
   AppStateManager() : super(AppState(historySelected: false)) {
     on<FactHistory>((event, emit) {
       emit(state.copyWith(true));
+    });
+    on<HistoryDismissed>((event, emit) {
+      emit(state.copyWith(false));
     });
   }
   bool showHistory = false;

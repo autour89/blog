@@ -1,10 +1,9 @@
+import 'package:blog/core/bloc/app_state_manager.dart';
 import 'package:blog/core/bloc/fact_bloc.dart';
 import 'package:blog/core/network/apis.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-
-import 'history_page.dart';
 
 class HomeView extends StatelessWidget {
   static const String _historyTitle = 'Fact history';
@@ -66,10 +65,8 @@ class HomeView extends StatelessWidget {
                   children: [
                     TextButton(
                       child: const Text(_historyTitle),
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HistoryPage())),
+                      onPressed: () =>
+                          context.read<AppStateManager>().add(FactHistory()),
                     ),
                     const SizedBox(width: 8),
                     TextButton(

@@ -1,3 +1,4 @@
+import 'package:blog/core/bloc/app_state_manager.dart';
 import 'package:blog/core/bloc/history_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,8 +21,18 @@ class HistoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (_) => HistoryCubit(repository: GetIt.I.get<Repository>()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<HistoryCubit>(
+            create: (_) => HistoryCubit(repository: GetIt.I.get<Repository>())),
+        BlocProvider<AppStateManager>(
+            create: (_) => GetIt.I.get<AppStateManager>())
+      ],
+      child: WillPopScope(
+        onWillPop: () async {
+          context.read<AppStateManager>().add(HistoryDismissed());
+          return true;
+        },
         child: Scaffold(
             appBar: AppBar(),
             body: Center(child:
@@ -56,6 +67,8 @@ class HistoryPage extends StatelessWidget {
                           ),
                         ));
                   });
-            }))));
+            }))),
+      ),
+    );
   }
 }

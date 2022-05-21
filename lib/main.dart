@@ -21,7 +21,10 @@ void main() async {
   await getIt<Repository>().init();
 
   BlocOverrides.runZoned(
-    () => runApp(const Blog()),
+    () => runApp(BlocProvider(
+      create: (_) => GetIt.I.get<AppStateManager>(),
+      child: const Blog(),
+    )),
     blocObserver: SimpleBlocObserver(),
   );
 }
