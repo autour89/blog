@@ -1,0 +1,3 @@
+class AppLink {
+  String? location;
+}

@@ -63,7 +63,7 @@ class HomeView extends StatelessWidget {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
+                  children: [
                     TextButton(
                       child: const Text(_historyTitle),
                       onPressed: () => Navigator.push(
