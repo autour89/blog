@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "510573753543",
+    "firebase_url": "https://maleva-studio-default-rtdb.firebaseio.com",
+    "project_id": "maleva-studio",
+    "storage_bucket": "maleva-studio.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510573753543:android:fe183cd278419c4f65bae2",
+        "android_client_info": {
+          "package_name": "com.malevastudio.blog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "510573753543-rqpl61np5itnk5014v6fgi1jhfv8u6pe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASzC9oRW78iAFZPUtign2hPNa5wPDnFhY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "510573753543-rqpl61np5itnk5014v6fgi1jhfv8u6pe.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "510573753543-165dor40f0epc8t4dalssjehuefkaoid.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.malevastudio.blog"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

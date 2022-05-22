@@ -3,12 +3,14 @@ import 'package:blog/core/bloc/fact_bloc.dart';
 import 'package:blog/core/network/apis.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterfire_ui/auth.dart';
 import 'package:intl/intl.dart';
 
 class HomeView extends StatelessWidget {
   static const String _historyTitle = 'Fact history';
   static const String _anotherFactTitle = 'Another fact';
   static const String _loadAgainTitle = 'Try load again...';
+  static const providerConfigs = [EmailProviderConfiguration()];
 
   const HomeView({Key? key}) : super(key: key);
 
@@ -19,8 +21,16 @@ class HomeView extends StatelessWidget {
         child: BlocBuilder<FactBloc, FactState>(
           builder: (context, state) {
             if (state is InitialState) {
-              context.read<FactBloc>().add(FactFetched());
-              return Container();
+              // context.read<FactBloc>().add(FactFetched());
+              // return Container();
+              return SignInScreen(
+                providerConfigs: providerConfigs,
+                actions: [
+                  AuthStateChangeAction<SignedIn>((context, state) {
+                    Navigator.pushReplacementNamed(context, '/profile');
+                  }),
+                ],
+              );
             }
             return Stack(children: [
               if (state is BusyState) ...[const CircularProgressIndicator()],

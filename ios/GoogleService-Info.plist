@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>510573753543-165dor40f0epc8t4dalssjehuefkaoid.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.510573753543-165dor40f0epc8t4dalssjehuefkaoid</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCg3fVQVh-s3y61mAzEULYRly95-JvIzKs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>510573753543</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.malevastudio.blog</string>
+	<key>PROJECT_ID</key>
+	<string>maleva-studio</string>
+	<key>STORAGE_BUCKET</key>
+	<string>maleva-studio.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:510573753543:ios:02ac4813dd2a522365bae2</string>
+	<key>DATABASE_URL</key>
+	<string>https://maleva-studio-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
