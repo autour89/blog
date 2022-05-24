@@ -22,7 +22,18 @@ class HomeView extends StatelessWidget {
     return BlocBuilder<FactBloc, FactState>(
       builder: (context, state) {
         switch (state.runtimeType) {
+          case BusyState:
+            return const CircularProgressIndicator();
+          case SuccessState:
+            return _onSuccessState(context);
+          case FailureState:
+            return TextButton(
+                child: const Text(_loadAgainTitle),
+                onPressed: () => context.read<FactBloc>().add(
+                      FactFetched(),
+                    ));
           case InitialState:
+          default:
             // context.read<FactBloc>().add(FactFetched());
             // return Container();
             return const SignInScreen(
@@ -33,19 +44,6 @@ class HomeView extends StatelessWidget {
                         '510573753543-rqpl61np5itnk5014v6fgi1jhfv8u6pe.apps.googleusercontent.com')
               ],
             );
-          case BusyState:
-            return const CircularProgressIndicator();
-          case SuccessState:
-            return _onSuccessState(context);
-          case FailureState:
-            return TextButton(
-              child: const Text(_loadAgainTitle),
-              onPressed: () => context.read<FactBloc>().add(
-                    FactFetched(),
-                  ),
-            );
-          default:
-            return Container();
         }
       },
     );
@@ -59,7 +57,7 @@ class HomeView extends StatelessWidget {
             elevation: 10,
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
+              children: [
                 ListTile(
                   leading: const CircleAvatar(
                     backgroundImage: NetworkImage(Apis.catUrl),
