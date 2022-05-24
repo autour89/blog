@@ -10,43 +10,44 @@ class HomeView extends StatelessWidget {
   static const String _historyTitle = 'Fact history';
   static const String _anotherFactTitle = 'Another fact';
   static const String _loadAgainTitle = 'Try load again...';
-  static const providerConfigs = [EmailProviderConfiguration()];
 
   const HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: BlocBuilder<FactBloc, FactState>(
-          builder: (context, state) {
-            if (state is InitialState) {
-              // context.read<FactBloc>().add(FactFetched());
-              // return Container();
-              return SignInScreen(
-                providerConfigs: providerConfigs,
-                actions: [
-                  AuthStateChangeAction<SignedIn>((context, state) {
-                    Navigator.pushReplacementNamed(context, '/profile');
-                  }),
-                ],
-              );
-            }
-            return Stack(children: [
-              if (state is BusyState) ...[const CircularProgressIndicator()],
-              if (state is SuccessState) ...[_onSuccessState(context)],
-              if (state is FailureState) ...[
-                TextButton(
-                  child: const Text(_loadAgainTitle),
-                  onPressed: () => context.read<FactBloc>().add(
-                        FactFetched(),
-                      ),
-                )
-              ]
-            ]);
-          },
-        ),
-      ),
+    return Scaffold(body: Center(child: _describeStates(context)));
+  }
+
+  Widget _describeStates(BuildContext context) {
+    return BlocBuilder<FactBloc, FactState>(
+      builder: (context, state) {
+        switch (state.runtimeType) {
+          case InitialState:
+            // context.read<FactBloc>().add(FactFetched());
+            // return Container();
+            return const SignInScreen(
+              providerConfigs: [
+                GoogleProviderConfiguration(
+                    scopes: ['profile', 'email'],
+                    clientId:
+                        '510573753543-rqpl61np5itnk5014v6fgi1jhfv8u6pe.apps.googleusercontent.com')
+              ],
+            );
+          case BusyState:
+            return const CircularProgressIndicator();
+          case SuccessState:
+            return _onSuccessState(context);
+          case FailureState:
+            return TextButton(
+              child: const Text(_loadAgainTitle),
+              onPressed: () => context.read<FactBloc>().add(
+                    FactFetched(),
+                  ),
+            );
+          default:
+            return Container();
+        }
+      },
     );
   }
 
