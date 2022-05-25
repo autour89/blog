@@ -3,7 +3,6 @@ import 'package:blog/core/bloc/fact_bloc.dart';
 import 'package:blog/core/network/apis.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterfire_ui/auth.dart';
 import 'package:intl/intl.dart';
 
 class HomeView extends StatelessWidget {
@@ -34,16 +33,8 @@ class HomeView extends StatelessWidget {
                     ));
           case InitialState:
           default:
-            // context.read<FactBloc>().add(FactFetched());
-            // return Container();
-            return const SignInScreen(
-              providerConfigs: [
-                GoogleProviderConfiguration(
-                    scopes: ['profile', 'email'],
-                    clientId:
-                        '510573753543-rqpl61np5itnk5014v6fgi1jhfv8u6pe.apps.googleusercontent.com')
-              ],
-            );
+            context.read<FactBloc>().add(FactFetched());
+            return Container();
         }
       },
     );

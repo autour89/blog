@@ -1,5 +1,5 @@
 import 'package:blog/ui/view/history_page.dart';
-import 'package:blog/ui/view/home_page.dart';
+import 'package:blog/ui/view/signin_page.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +25,12 @@ class BlogState extends State<Blog> {
   }
 
   List<Page> onGeneratePages(AppState state, List<Page> pages) {
-    return [HomePage.page(), if (state.historySelected) HistoryPage.page()];
+    return [
+      // FirebaseAuth.instance.currentUser == null
+      //     ? SignInPage.page()
+      //     : HomePage.page(),
+      SignInPage.page(),
+      if (state.historySelected) HistoryPage.page(),
+    ];
   }
 }

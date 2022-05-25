@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:blog/core/models/fact.dart';
 import 'package:blog/core/network/api_client.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../data/repository.dart';
 
@@ -22,13 +23,13 @@ class FactBloc extends Bloc<FactEvent, FactState> {
     emit(BusyState());
 
     try {
-      // var fact = await httpClient.getFact();
+      var fact = await httpClient.getFact();
 
-      // await repository.add(fact);
+      await repository.add(fact);
 
-      // PaintingBinding.instance.imageCache.clear();
+      PaintingBinding.instance.imageCache.clear();
 
-      await Future.delayed(const Duration(seconds: 2));
+      // await Future.delayed(const Duration(seconds: 2));
 
       emit(SuccessState());
     } catch (e) {

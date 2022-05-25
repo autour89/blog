@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterfire_ui/auth.dart';
 import 'package:get_it/get_it.dart';
 
 import 'app.dart';
@@ -17,6 +18,14 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  FlutterFireUIAuth.configureProviders([
+    const EmailProviderConfiguration(),
+    const GoogleProviderConfiguration(
+        scopes: ['profile', 'email'],
+        clientId:
+            '510573753543-rqpl61np5itnk5014v6fgi1jhfv8u6pe.apps.googleusercontent.com'),
+  ]);
 
   var getIt = GetIt.instance;
   getIt.registerSingleton<ApiClient>(ApiClient(Dio()));
