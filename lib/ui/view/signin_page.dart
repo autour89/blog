@@ -1,6 +1,10 @@
+import 'package:blog/core/bloc/app_state_manager.dart';
+import 'package:blog/core/bloc/auth_bloc.dart';
 import 'package:blog/core/models/pages.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterfire_ui/auth.dart';
+import 'package:get_it/get_it.dart';
 
 class SignInPage extends StatelessWidget {
   static MaterialPage page() {
@@ -16,28 +20,17 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: SignInScreen(
-        subtitleBuilder: (context, action) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Text(
-              action == AuthAction.signIn
-                  ? 'Welcome to FlutterFire UI! Please sign in to continue.'
-                  : 'Welcome to FlutterFire UI! Please create an account to continue',
-            ),
-          );
-        },
-        footerBuilder: (context, _) {
-          return const Padding(
-            padding: EdgeInsets.only(top: 16),
-            child: Text(
-              'By signing in, you agree to our terms and conditions.',
-              style: TextStyle(color: Colors.grey),
-            ),
-          );
-        },
-      ),
+      body: MultiBlocProvider(
+          providers: [
+            BlocProvider<AuthBloc>(create: (_) => AuthBloc()),
+            BlocProvider<AppStateManager>(
+                create: (_) => GetIt.I.get<AppStateManager>())
+          ],
+          child: BlocBuilder<AuthBloc, AuthCurrentState>(
+            builder: (context, state) {
+              return const SignInScreen(showAuthActionSwitch: false);
+            },
+          )),
     );
   }
 }
